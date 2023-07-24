@@ -93,7 +93,8 @@ var passwordLength = prompt(
   "How many characters would you like your password to generate?"
 );
 
-// Array of arrays of special
+// Array of arrays of password charaters
+var arr = [specialCharacters, numericCharacters, lowerCasedCharacters, upperCasedCharacters]
 // Function to prompt user for password options
 function getPasswordOptions() {
   if (passwordLength < 8 || passwordLength > 128) {
