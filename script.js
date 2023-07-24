@@ -96,7 +96,14 @@ var passwordLength = prompt(
 // Array of arrays of special
 // Function to prompt user for password options
 function getPasswordOptions() {
- 
+  if (passwordLength < 8 || passwordLength > 128) {
+    passwordLength = confirm(
+      "Password length must be less than 129")
+  } else {
+    var passwordUpperCase = confirm("Click Ok to confirm Uppercase Characters");
+    var passwordNumeric = confirm("Click Ok to confirm Numeric Characters");
+    var passwordSpecial = confirm("Click Ok to confirm Special Characters");
+  }
 }
 getPasswordOptions();
 
