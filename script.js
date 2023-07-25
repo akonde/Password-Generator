@@ -87,7 +87,11 @@ var upperCasedCharacters = [
   "Y",
   "Z",
 ];
-
+var passwordlength;
+var addSpecialChars;
+var addNumericChars;
+var addLowercaseChars;
+var addUppercaseChars;
 // Function to prompt user for password options
 function getPasswordOptions() {
   var passwordlength = parseInt(
@@ -97,44 +101,63 @@ function getPasswordOptions() {
   );
 
   // Check if the entered passwordlength is a number and within the specified range
-  while (isNaN(passwordlength) || passwordlength < 8 || passwordlength > 128) {
+  if (isNaN(passwordlength) || passwordlength < 8 || passwordlength > 128) {
     passwordlength = parseInt(
       prompt(
         "Please enter a valid password passwordlength (between 8 and 128 characters):"
       )
     );
+    return;
+  } else {
+    const b = specialCharacters.concat(
+      numericCharacters,
+      lowerCasedCharacters,
+      upperCasedCharacters
+    );
+
+    addSpecialChars = confirm("Click OK to add special characters?");
+    addNumericChars = confirm("Do you want to add numeric characters?");
+    addLowercaseChars = confirm("Do you want to add lowercase characters?");
+    addUppercaseChars = confirm("Do you want to add uppercase characters?");
   }
-  var addSpecialChars = confirm("Click OK to add special characters?");
-  var addNumericChars = confirm("Do you want to add numeric characters?");
-  var addLowercaseChars = confirm("Do you want to add lowercase characters?");
-  var addUppercaseChars = confirm("Do you want to add uppercase characters?");
 
-  // Create an object to store the password options
-  var passwordOptions = {
-    passwordlength: passwordlength,
-    addSpecialChars: addSpecialChars,
-    addNumericChars: addNumericChars,
-    addLowercaseChars: addLowercaseChars,
-    addUppercaseChars: addUppercaseChars,
-  };
+ 
+}
+// Function to generate password with user input
+function generatePassword() {
+  var options = getPasswordOptions();
+  var passwordArray = [];
 
-  return passwordOptions;
+  // Concatenate the selected character arrays based on user options
+  if (addSpecialChars) {
+    passwordArray = passwordArray.concat(specialCharacters);
+  }
+  if (addNumericChars) {
+    passwordArray = passwordArray.concat(numericCharacters);
+  }
+  if (addLowercaseChars) {
+    passwordArray = passwordArray.concat(lowerCasedCharacters);
+  }
+  if (addUppercaseChars) {
+    passwordArray = passwordArray.concat(upperCasedCharacters);
+  }
+
+  // Generate the password
+  var generatedPassword = [];
+  for (var i = 0; i < passwordlength; i++) {
+    var randomIndex = Math.floor(Math.random() * passwordArray.length);
+    generatedPassword = passwordArray[randomIndex];
+    console.log(passwordArray[i]);
+    console.log("generatedPssweord", generatedPassword);
+  }
+
+  return generatedPassword;
+  console.log(generatePassword, "generatedPassword");
 }
 
-// Validate if at least one character type is selected
-// while (!addSpecialChars && !addNumericChars && !addLowercaseChars && !addUppercaseChars) {
-//   alert("You must select at least one character type!");
-//   addSpecialChars = confirm("Do you want to add special characters?");
-//   addNumericChars = confirm("Do you want to add numeric characters?");
-//   addLowercaseChars = confirm("Do you want to add lowercase characters?");
-//   addUppercaseChars = confirm("Do you want to add uppercase characters?");
-// }
 
 // Function for getting a random element from an array
 function getRandom(arr) {}
-
-// Function to generate password with user input
-function generatePassword() {}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -149,3 +172,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
