@@ -6,6 +6,10 @@ This app was created for generating random password
 ## Link
 
 https://akonde.github.io/Password-Generator
+
+## Screenshot
+
+![Password-Generator](https://github.com/akonde/Password-Generator/assets/49449335/54044078-d2b0-4461-b69c-24956a239c95)
 ## Installation
 
 N/A
